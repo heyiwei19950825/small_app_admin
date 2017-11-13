@@ -22,8 +22,8 @@ class SearchController extends PublicController {
     //  产品商家搜索接口
     //***************************
     public function searches(){
-        $uid = intval($_REQUEST['uid']);
-
+        $uid  = intval($_REQUEST['uid']);
+        $page = intval($_REQUEST['page']);
         $keyword = trim($_REQUEST['keyword']);
         if (!$keyword) {
             echo json_encode(array('status'=>0,'err'=>'请输入搜索内容.'));
@@ -44,27 +44,29 @@ class SearchController extends PublicController {
             }
         }
 
-        $page=intval($_REQUEST['page']);
-        if (!$page) {
+        if (!$page || $page == 1) {
             $page=0;
+        }else{
+            $page=($page - 1)*6;
         }
 
-        $prolist = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND name LIKE "%'.$keyword.'%"')->order('addtime desc')->field('id,name,photo_x,shiyong,price,price_yh')->select();
+        $prolist = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND name LIKE "%'.$keyword.'%"')->limit($page.',6')->order('addtime desc')->field('id,name,photo_x,shiyong,price,price_yh')->select();
         foreach ($prolist as $k => $v) {
             $prolist[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
         }
 
-        $page2=intval($_REQUEST['page2']);
-        if (!$page2) {
-            $page2=0;
-        }
-
-        $condition = array();
-        $condition['status']=1;
-        //根据店铺名称查询
-        $condition['name']=array('LIKE','%'.$keyword.'%');
-        //获取所有的商家数据
-        $store_list = M('shangchang')->where($condition)->order('sort desc,type desc')->field('id,name,uname,logo,tel,sheng,city,quyu')->limit($page2.',6')->select();
+        // $page2= (intval($_REQUEST['page2']) -1)*6;
+        // if (!$page2) {
+        //     $page2=0;
+        // }
+        // echo $page2;die;
+        // $condition = array();
+        // $condition['status']=1;
+        // //根据店铺名称查询
+        // $condition['name']=array('LIKE','%'.$keyword.'%');
+        // //获取所有的商家数据
+        // $store_list = M('shangchang')->where($condition)->order('sort desc,type desc')->field('id,name,uname,logo,tel,sheng,city,quyu')->limit($page2.',6')->select();
+        $store_list = [];
         foreach ($store_list as $k => $v) {
             $store_list[$k]['sheng'] = M('china_city')->where('id='.intval($v['sheng']))->getField('name');
             $store_list[$k]['city'] = M('china_city')->where('id='.intval($v['city']))->getField('name');

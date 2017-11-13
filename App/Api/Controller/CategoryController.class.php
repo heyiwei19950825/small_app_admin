@@ -13,7 +13,7 @@ class CategoryController extends PublicController {
             $catList[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
         }
         //父分类数据
-        $cateInfo = M('category')->where('tid='.intval($list[0]['id']))->field('id,name,bz_1')->find();
+        $cateInfo = M('category')->where('id='.intval($list[0]['id']))->field('id,name,bz_1')->find();
         $cateInfo['bz_1'] = __DATAURL__.$cateInfo['bz_1'];
 
     	//json加密输出
@@ -32,7 +32,7 @@ class CategoryController extends PublicController {
             exit();
         }
         //父分类数据
-        $cateInfo = M('category')->where('tid='.intval($catid))->field('id,name,bz_1')->find();
+        $cateInfo = M('category')->where('id='.intval($catid))->field('id,name,bz_1')->find();
         $cateInfo['bz_1'] = __DATAURL__.$cateInfo['bz_1'];
 
         //父分类下的子分类数据

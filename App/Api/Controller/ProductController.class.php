@@ -221,16 +221,16 @@ class ProductController extends PublicController {
  			$json['intro']=$v['intro'];
  			$json_arr[] = $json;
  		}
- 		$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent')->find();
+ 		$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent,tid')->find();
  		//======================
         //首页推荐品牌 20个
         //======================
-        $brand = M('brand')->where('1=1')->field('id,name,photo')->limit(20)->select();
-        foreach ($brand as $k => $v) {
-            $brand[$k]['photo'] = __DATAURL__.$v['photo'];
+        $cateList = M('category')->where('tid!=1 and tid !=0')->field('id,name,bz_1')->limit(20)->select();
+        foreach ($cateList as $k => $v) {
+            $cateList[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
         }
 
- 		echo json_encode(array('status'=>1,'pro'=>$json_arr,'cat'=>$cat,'brand'=>$brand));
+ 		echo json_encode(array('status'=>1,'pro'=>$json_arr,'cat'=>$cat,'cateList'=>$cateList));
  		exit();
     }
 

@@ -8,7 +8,7 @@ class IndexController extends PublicController {
     public function index(){
     	//如果缓存首页没有数据，那么就读取数据库
     	/***********获取首页顶部轮播图************/
-    	$ggtop=M('guanggao')->order('sort desc,id asc')->field('id,name,photo')->limit(10)->select();
+    	$ggtop=M('guanggao')->order('sort desc,id asc')->field('id,name,photo,position')->limit(10)->select();
 		foreach ($ggtop as $k => $v) {
 			$ggtop[$k]['photo']=__DATAURL__.$v['photo'];
 			$ggtop[$k]['name']=urlencode($v['name']);
@@ -18,9 +18,9 @@ class IndexController extends PublicController {
         //======================
         //首页推荐品牌 20个
         //======================
-        $cate = M('category')->where('tid=1')->field('id,name,bz_1')->limit(20)->select();
-        foreach ($cate as $k => $v) {
-            $cate[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
+        $brand = M('brand')->where('type=1')->field('id,name,photo')->limit(4)->select();
+        foreach ($brand as $k => $v) {
+            $brand[$k]['photo'] = __DATAURL__.$v['photo'];
         }
 
         //======================
@@ -65,7 +65,7 @@ class IndexController extends PublicController {
         // $procat[3]['ptype'] = 'gywm';
         $procat = '';
         $course = '';
-    	echo json_encode(array('ggtop'=>$ggtop,'procat'=>$procat,'prolist'=>$pro_list,'cate'=>$cate,'course'=>$course));
+    	echo json_encode(array('ggtop'=>$ggtop,'procat'=>$procat,'prolist'=>$pro_list,'brand'=>$brand,'course'=>$course));
     	exit();
     }
 
