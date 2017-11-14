@@ -39,8 +39,9 @@
 
         <tr class="text-c">
             <th width="40">ID</th>
-            <th width="150">logo图片</th>
             <th width="130">品牌名称</th>
+            <th width="150">logo图片</th>
+            <th width="150">banner图片</th>
             <th width="80">是否推荐</th>
             <th width="100">操作</th>
         </tr>
@@ -51,8 +52,9 @@
         <volist name='list' id="b">
             <tr  class="text-c">
                 <td>{$b.id}</td>
-                <td><img src="__DATA__/{$b.photo}" width="80px" height="80px"></td>
                 <td>{$b.name}</td>
+                <td><img src="__DATA__/{$b.photo}" width="80px" height="80px"></td>
+                <td><img src="__DATA__/{$b.banner}" width="180px" height="80px"></td>
                 <td><if condition="$b.type eq 1"><label style="color:green;">是</label><else />否</if></td>
                 <td class="obj_1">
                     <a href="{:U('set_tj')}?id={$b.id}" >推荐</a> |

@@ -221,9 +221,19 @@ class ProductController extends PublicController {
  			$json['intro']=$v['intro'];
  			$json_arr[] = $json;
  		}
- 		$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent,tid')->find();
+ 		//分类ID不等于空
+ 		if( !empty($id)){
+ 			$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent,tid')->find();
+ 		}
+
+ 		//品牌分类不等于空
+ 		if( !empty($brand_id) ){
+ 			$cat=M('brand')->where("id=".intval($brand_id))->field('banner')->find();
+            $cat['banner'] = __DATAURL__.$cat['banner'];
+ 		}
+
  		//======================
-        //首页推荐品牌 20个
+        //首页推荐分类 20个
         //======================
         $cateList = M('category')->where('tid!=1 and tid !=0')->field('id,name,bz_1')->limit(20)->select();
         foreach ($cateList as $k => $v) {

@@ -76,9 +76,9 @@ class BrandController extends PublicController{
 		$this->Brand->create();
 		//上传广告图片
 		$photo = '';
-		if (!empty($_FILES["file"]["tmp_name"])) {
+		if (!empty($_FILES["file_logo"]["tmp_name"])) {
 			//文件上传
-			$info = $this->upload_images($_FILES["file"],array('jpg','png','jpeg'),'brand/'.date(Ymd));
+			$info = $this->upload_images($_FILES["file_logo"],array('jpg','png','jpeg'),'brand/'.date(Ymd));
 		    if(!is_array($info)) {// 上传错误提示错误信息
 		        $this->error($info);
 		        exit();
@@ -86,6 +86,24 @@ class BrandController extends PublicController{
 			    $this->Brand->photo = 'UploadFiles/'.$info['savepath'].$info['savename'];
 			    if (intval($_POST['id'])) {
 					$photo = $this->Brand->where('id='.intval($_POST['id']))->getField('photo');
+				}
+			    //生成国定大小的缩略图
+			    /*$path_url = './Data/UploadFiles/'.$info['savepath'].$info['savename'];
+			    $image = new \Think\Image();
+			    $image->open($path_url);
+			    $image->thumb(310, 120,\Think\Image::IMAGE_THUMB_FIXED)->save($path_url);*/
+		    }
+		}
+		if (!empty($_FILES["file_banner"]["tmp_name"])) {
+			//文件上传
+			$info = $this->upload_images($_FILES["file_banner"],array('jpg','png','jpeg'),'brand/'.date(Ymd));
+		    if(!is_array($info)) {// 上传错误提示错误信息
+		        $this->error($info);
+		        exit();
+		    }else{// 上传成功 获取上传文件信息
+			    $this->Brand->banner = 'UploadFiles/'.$info['savepath'].$info['savename'];
+			    if (intval($_POST['id'])) {
+					$banner = $this->Brand->where('id='.intval($_POST['id']))->getField('banner');
 				}
 			    //生成国定大小的缩略图
 			    /*$path_url = './Data/UploadFiles/'.$info['savepath'].$info['savename'];
@@ -105,11 +123,22 @@ class BrandController extends PublicController{
 		}
 		//判断数据是否更新成功
 		if ($result) {
-			if (!empty($photo) && intval($_POST['id'])) {
-				$img_url = "Data/".$photo;
-				if(file_exists($img_url)) {
-					@unlink($img_url);
+			if ( intval($_POST['id'])) {
+				
+				if(!empty($photo)){
+					$img_url = "Data/".$photo;
+					if(file_exists($img_url)) {
+						@unlink($img_url);
+					}
 				}
+
+				if(!empty($banner)){
+					$img_url = "Data/".$banner;
+					if(file_exists($img_url)) {
+						@unlink($img_url);
+					}
+				}
+				
 			}
 			$this->success('操作成功.','index');
 		}else{
