@@ -25,16 +25,103 @@
     <script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
 
     <title>管理首页</title>
+    <style type="text/css">
+        .demo-div{
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理后台 <span class="c-gray en">&gt;</span> 管理首页 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-    <ul class="aaa_pts_show_6">
-        <li>用户名：  <font><?php echo $_SESSION["admininfo"]['name'] ?></font></li>
-        <br>
-        <li>小程序：<font class="r1" style="color:#090"><?php echo $_SESSION["system"]['sysname'] ?></font></li>
-
-    </ul>
+    <div class="row-demo">
+        <div class="row cl">
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-danger">
+                    <div class="panel-header">用户数量</div>
+                    <div class="panel-body">
+                        <div class="demo-div">
+                            小程序用户总数量：0
+                        </div>
+                        <div class="demo-div">
+                           小程序今日添加用户数：0
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-success">
+                    <div class="panel-header">订单数量</div>
+                      <div class="panel-body">
+                        <div class="demo-div">
+                            待付款：0
+                        </div>
+                        <div class="demo-div">
+                            待发货：0
+                        </div>
+                        <div class="demo-div">
+                            已发货：0
+                        </div>  
+                        <div class="demo-div">
+                            已完成：0
+                        </div>  
+                        <div class="demo-div">
+                            已关闭：0
+                        </div>   
+                        <div class="demo-div">
+                            退货中：0
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-demo" style="margin-top:30px;">
+       <div class="row cl">
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-header">销售情况统计</div>
+                      <div class="panel-body">
+                        <div class="demo-div">
+                            今日销量：0
+                        </div>
+                        <div class="demo-div">
+                            本月销量:0
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-secondary">
+                    <div class="panel-header">交易</div>
+                    <div class="panel-body">
+                        <div class="demo-div">
+                            今日订单总金额(元)：0
+                        </div>
+                        <div class="demo-div">
+                            总订单金额(元)：0
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+   <!--  <div class="row-demo" style="margin-top:30px;">
+       <div class="row cl">
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-header">面板标题</div>
+                    <div class="panel-body">面板内容</div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-warning">
+                    <div class="panel-header">面板标题</div>
+                    <div class="panel-body">面板内容</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>
 
 

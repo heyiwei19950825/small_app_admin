@@ -349,15 +349,17 @@ class ProductController extends PublicController {
 		$check = M('product_sc')->where('uid='.intval($uid).' AND pid='.intval($pid))->getField('id');
 		if ($check) {
 			$res = M('product_sc')->where('id='.intval($check))->delete();
+			$option = 'delete';
 		}else{
 			$data = array();
 			$data['uid'] = intval($uid);
 			$data['pid'] = intval($pid);
 			$res = M('product_sc')->add($data);
+			$option = 'add';
 		}
 		
 		if ($res) {
-			echo json_encode(array('status'=>1));
+			echo json_encode(array('status'=>1,'option'=>$option));
 			exit();
 		}else{
 			echo json_encode(array('status'=>0,'err'=>'网络错误..'));
@@ -485,4 +487,8 @@ class ProductController extends PublicController {
  		exit();
 	}
 
+	//***************************
+	//  获取收藏列表
+	//***************************
+	public function get
 }

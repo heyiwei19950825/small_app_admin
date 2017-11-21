@@ -190,7 +190,7 @@ class UserController extends PublicController {
 	//  用户商品收藏信息
 	//***************************
 	public function collection(){
-		$user_id = intval($_REQUEST['id']);
+		$user_id = intval($_REQUEST['userId']);
 		if (!$user_id) {
 			echo json_encode(array('status'=>0,'err'=>'系统错误，请稍后再试.'));
 			exit();
@@ -221,7 +221,7 @@ class UserController extends PublicController {
 	//  用户单个商品取消收藏
 	//***************************
 	public function collection_qu(){
-	    $sc_id = intval($_REQUEST['id']);
+	    $sc_id = intval($_REQUEST['ccId']);
     	if (!$sc_id) {
     		echo json_encode(array('status'=>0,'err'=>'非法操作.'));
     		exit();

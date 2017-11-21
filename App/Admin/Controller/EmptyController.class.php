@@ -1,6 +1,8 @@
 <?php
+// 百度地图接口
 namespace Admin\Controller;
 use Think\Controller;
+
 class EmptyController extends PublicController{
 	public function index(){
 		//输出百度地图插件的路径

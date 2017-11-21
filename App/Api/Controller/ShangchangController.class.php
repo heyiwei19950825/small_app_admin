@@ -109,6 +109,7 @@ class ShangchangController extends PublicController {
 
     	//获取8个商品
     	$pro_list = M('product')->where('shop_id='.intval($shop_id).' AND del=0 AND is_down=0')->order('addtime desc,sort desc')->field('id,name,intro,price_yh,photo_x,shiyong')->limit(8)->select();
+        
     	foreach ($pro_list as $k => $v) {
     		$pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
     	}
