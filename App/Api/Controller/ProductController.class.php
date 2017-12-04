@@ -224,21 +224,24 @@ class ProductController extends PublicController {
  		//分类ID不等于空
  		if( !empty($id)){
  			$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent,tid')->find();
+
+ 			$cateList = M('category')->where('tid!=1 and tid !=0')->field('id,name,bz_1')->limit(20)->select();
+	        foreach ($cateList as $k => $v) {
+	            $cateList[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
+	        }
  		}
 
  		//品牌分类不等于空
  		if( !empty($brand_id) ){
  			$cat=M('brand')->where("id=".intval($brand_id))->field('banner')->find();
             $cat['banner'] = __DATAURL__.$cat['banner'];
+
+            $cateList = M('brand')->where('type!=0')->field('id,name,banner')->limit(20)->select();
+	        foreach ($cateList as $k => $v) {
+	            $cateList[$k]['banner'] = __DATAURL__.$v['banner'];
+	        }
  		}
 
- 		//======================
-        //首页推荐分类 20个
-        //======================
-        $cateList = M('category')->where('tid!=1 and tid !=0')->field('id,name,bz_1')->limit(20)->select();
-        foreach ($cateList as $k => $v) {
-            $cateList[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
-        }
 
  		echo json_encode(array('status'=>1,'pro'=>$json_arr,'cat'=>$cat,'cateList'=>$cateList));
  		exit();
@@ -486,9 +489,4 @@ class ProductController extends PublicController {
  		echo json_encode(array('status'=>1,'pro'=>$json_arr));
  		exit();
 	}
-
-	//***************************
-	//  获取收藏列表
-	//***************************
-	public function get
 }

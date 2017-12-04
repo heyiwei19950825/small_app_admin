@@ -286,6 +286,8 @@ class OrderController extends PublicController {
 		$order_id = intval($_REQUEST['order_id']);
 		//订单详情
 		$orders=M("order");
+		$yunfei=M("post");
+
 		$product_dp=M("product_dp");
 		$orderp=M("order_product");
 		$id=intval($_REQUEST['id']);
@@ -301,7 +303,8 @@ class OrderController extends PublicController {
 		$order_status=array('0'=>'已取消','10'=>'待付款','20'=>'待发货','30'=>'待收货','40'=>'已收货','50'=>'交易完成');
 		//支付类型
 		$pay_type = array('cash'=>'现金支付','alipay'=>'支付宝','weixin'=>'微信支付');
-
+		//运费
+		$yunfei = $yunfei->where('id='.$order_info['yunfei'])->find();
 		$order_info['shop_name'] = M('shangchang')->where('id='.intval($order_info['shop_id']))->getField('name');
 		$order_info['order_status'] = $order_status[$order_info['status']];
 		$order_info['pay_type'] = $pay_type[$order_info['type']];

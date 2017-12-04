@@ -222,13 +222,12 @@ class PaymentController extends PublicController {
 			//检测购物车是否有对应数据
 			$check_cart = $shopping->where('id='.intval($v))->getField('id');
 			if (!$check_cart) {
-				echo json_encode(array('status'=>0,'err'=>'非法操作.'.__LINE__));
+				echo json_encode(array('status'=>0,'err'=>'已加购物车.'.__LINE__));
 				exit();
 			}
 
 			$pro[$k]=$shopping->where(''.$qz.'shopping_char.uid='.intval($uid).' and '.$qz.'shopping_char.id='.$v)->join('LEFT JOIN __PRODUCT__ ON __PRODUCT__.id=__SHOPPING_CHAR__.pid')->join('LEFT JOIN __SHANGCHANG__ ON __SHANGCHANG__.id=__SHOPPING_CHAR__.shop_id')->field(''.$qz.'product.num as pnum,'.$qz.'shopping_char.id,'.$qz.'shopping_char.pid,'.$qz.'shangchang.name as sname,'.$qz.'product.name,'.$qz.'product.shop_id,'.$qz.'product.photo_x,'.$qz.'product.price_yh,'.$qz.'shopping_char.num,'.$qz.'shopping_char.buff,'.$qz.'shopping_char.price')->find();
 		    //获取运费
-		    $yunfei = $post->where('pid='.intval($pro[$k]['shop_id']))->find();
 		    //dump($yunfei);
 		    if($pro[$k]['buff']!=''){
 		    	$pro[$k]['zprice']=$pro[$k]['price']*$pro[$k]['num'];
@@ -267,11 +266,13 @@ class PaymentController extends PublicController {
 			$price+=$pro1[$ks]['zprice'];
 		}
 
+		$yunfei = $post->where('sort=1')->find();
 		//如果需要运费
 		if ($yunfei) {
 			if ($yunfei['price_max']>0 && $yunfei['price_max']<=$price) {
 				$yunfei['price']=0;
 			}
+			$yunfei['price'] = $yunfei['price'] +0;
 		}
 
 		if (!$add) {

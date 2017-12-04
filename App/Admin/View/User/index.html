@@ -66,7 +66,8 @@
                 <td><if condition="$v.del neq 0"><label style="color:red;">已禁用</label><else /><label style="color:green;">正常</label></if></td>
                 <td class="obj_1">
                     <!-- <a href="{:U('User/add')}?id={$v.id}">修改</a> -->
-                    <a onclick='del_id_urls({$v.id},{$page})'><if condition="$v.del neq 0"><label style="color:green;">恢复</label><else />禁用</if></a>
+                    <a onclick='del_id_urls({$v.id},{$page})'><if condition="$v.del neq 0"><label style="color:green;">恢复</label><else />禁用</if></a> | 
+                    <a data-href="{:U('User/address')}?id={$v.id}" href="{:U('User/address')}?id={$v.id}" target="iframe">地址查询</a>
                 </td>
             </tr>
         </volist>
@@ -104,9 +105,9 @@
     }
 
     //更改按钮
-    if(type=='xz'){
-        $('.obj_1').html('<input type="button" value="选 择" class="aaa_pts_web_3" style="margin:3px 0;" onclick="window_opener(this)">');
-    }
+    // if(type=='xz'){
+    //     $('.obj_1').html('<input type="button" value="选 择" class="aaa_pts_web_3" style="margin:3px 0;" onclick="window_opener(this)">');
+    // }
 
     function window_opener(e){
         var obj=$(e);
@@ -122,6 +123,7 @@
         }
     }
 </script>
+<div class="footer">Copyright2015-2017 眉山市坤飞网络科技有限公司 版权所有</div>
 
 </body>
 </html>

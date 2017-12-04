@@ -41,10 +41,10 @@
                     <div class="panel-header">用户数量</div>
                     <div class="panel-body">
                         <div class="demo-div">
-                            小程序用户总数量：0
+                            小程序用户总数量：{$userData.sum}
                         </div>
                         <div class="demo-div">
-                           小程序今日添加用户数：0
+                           小程序今日添加用户数：{$userData.new_sum}
                         </div>  
                     </div>
                 </div>
@@ -54,22 +54,22 @@
                     <div class="panel-header">订单数量</div>
                       <div class="panel-body">
                         <div class="demo-div">
-                            待付款：0
+                            待付款：{$orderData['10']}
                         </div>
                         <div class="demo-div">
-                            待发货：0
+                            待发货：{$orderData['20']}
                         </div>
                         <div class="demo-div">
-                            已发货：0
+                            已发货：{$orderData['30']}
                         </div>  
                         <div class="demo-div">
-                            已完成：0
+                            已完成：{$orderData['50']}
                         </div>  
                         <div class="demo-div">
-                            已关闭：0
+                            已关闭：{$orderData['51']}
                         </div>   
                         <div class="demo-div">
-                            退货中：0
+                            退货中：{$orderData['52']}
                         </div> 
                     </div>
                 </div>
@@ -83,10 +83,10 @@
                     <div class="panel-header">销售情况统计</div>
                       <div class="panel-body">
                         <div class="demo-div">
-                            今日销量：0
+                            今日销量：{$sellData['new_num']} 件
                         </div>
                         <div class="demo-div">
-                            本月销量:0
+                            总月销量：{$sellData['num']} 件
                         </div>  
                     </div>
                 </div>
@@ -96,10 +96,10 @@
                     <div class="panel-header">交易</div>
                     <div class="panel-body">
                         <div class="demo-div">
-                            今日订单总金额(元)：0
+                            今日订单总金额(元)：{$moneyData['new_num']} 元
                         </div>
                         <div class="demo-div">
-                            总订单金额(元)：0
+                            总订单金额(元)：{$moneyData['num']} 元
                         </div>  
                     </div>
                 </div>
@@ -123,8 +123,6 @@
         </div>
     </div> -->
 </div>
-
-
-
+<div class="footer">Copyright2015-2017 眉山市坤飞网络科技有限公司 版权所有</div>
 </body>
 </html>

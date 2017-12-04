@@ -98,14 +98,17 @@ class ShangchangController extends PublicController {
     public function shop_details(){
 
     	$shop_id = intval($_REQUEST['shop_id']);
-    	$shop_info = M('shangchang')->where('id='.intval($shop_id))->field('id,name,uname,tel,logo,address,content')->find();
+    	$shop_info = M('shangchang')->where('id='.intval($shop_id))->field('id,name,uname,tel,logo,address,content,location_x,location_y')->find();
     	if (!$shop_info) {
     		echo json_encode(array('status'=>0,'err'=>'没有找到商铺信息.'));
     		exit();
     	}
 
     	$shop_info['logo']=__DATAURL__.$shop_info['logo'];
+        $shop_info['content'] = str_replace('/Data/UploadFiles/Uploads/', __DATAURL__.'UploadFiles/Uploads/', $shop_info['content']);
     	$shop_info['content']=html_entity_decode($shop_info['content'], ENT_QUOTES ,'utf-8');
+        $shop_info['location_x'] = $shop_info['location_x']-0.00656;
+        $shop_info['location_y'] = $shop_info['location_y']-0.00625;
 
     	//获取8个商品
     	$pro_list = M('product')->where('shop_id='.intval($shop_id).' AND del=0 AND is_down=0')->order('addtime desc,sort desc')->field('id,name,intro,price_yh,photo_x,shiyong')->limit(8)->select();

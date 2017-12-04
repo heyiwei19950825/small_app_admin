@@ -33,6 +33,9 @@ class ShoppingController extends PublicController {
         		$shop[$n]['slist'][$k]['photo_x'] = __DATAURL__.$vl['photo_x'];
         	}
 		}*/
+		//运费
+		$post = M('post');
+		$yunfei = $post->where('sort=1')->find();
 
 		$cart = $shopping->where('uid='.intval($user_id))->field('id,uid,pid,price,num')->select();
         foreach ($cart as $k => $v) {
@@ -41,7 +44,7 @@ class ShoppingController extends PublicController {
         	$cart[$k]['photo_x']=__DATAURL__.$pro_info['photo_x'];
         }
 
-		echo json_encode(array('status'=>1,'cart'=>$cart));
+		echo json_encode(array('status'=>1,'cart'=>$cart,'yunfei'=>$yunfei));
 		exit();
     }
 

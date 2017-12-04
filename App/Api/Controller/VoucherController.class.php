@@ -6,11 +6,20 @@ class VoucherController extends PublicController {
 	//  所有单页数据接口
 	//***************************
     public function index(){
+        $uid = intval($_REQUEST['uid']);
     	$condition = array();
         $condition['del'] = 0;
         $condition['start_time'] = array('lt',time());
         $condition['end_time'] = array('gt',time());
 
+        $userVData = M('user_voucher')->where('uid='.intval($uid))->field('vid')->select();
+        $userVStr = '';
+        foreach ($userVData as $key => $value) {
+            $userVStr .= $value['vid'].',';
+        }
+        $userVStr=rtrim($userVStr,',');
+        $userVStr = empty($userVStr)?'':$userVStr;
+        $condition['id']  = array('not in',$userVStr);
         $vou = M('voucher')->where($condition)->order('addtime desc')->select();
         foreach ($vou as $k => $v) {
             $vou[$k]['start_time'] = date("Y.m.d",intval($v['start_time']));

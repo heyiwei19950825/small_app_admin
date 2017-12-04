@@ -96,7 +96,6 @@ class ShangchangController extends PublicController{
 			$city=$scq['city'];
 			$quyu=$scq['quyu'];
 		}
-		//dump($scq);exit;
 		//==========================================
 		// 组装post过来的数据进行处理添加
 		//==========================================
