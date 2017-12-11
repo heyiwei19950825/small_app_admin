@@ -225,7 +225,7 @@ class ProductController extends PublicController {
  		if( !empty($id)){
  			$cat=M('category')->where("id=".intval($id))->order('sort desc')->field('name,concent,tid')->find();
 
- 			$cateList = M('category')->where('tid!=1 and tid !=0')->field('id,name,bz_1')->limit(20)->select();
+ 			$cateList = M('category')->where('tid='.$cat['tid'])->field('id,name,bz_1')->limit(20)->select();
 	        foreach ($cateList as $k => $v) {
 	            $cateList[$k]['bz_1'] = __DATAURL__.$v['bz_1'];
 	        }

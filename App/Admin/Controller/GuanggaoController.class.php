@@ -111,7 +111,7 @@ class GuanggaoController extends PublicController{
 		if( !empty($_POST['type']) ){
 			switch ($_POST['type']) {
 				case 'goods':
-					$url = 'Api/Product/index?pro_id=';
+					$url = '../product/detail?productId=';
 					$isGoods = M('Product')->where('id='.intval($urlId) )->find();
 					if(empty($isGoods)){
 						$this->error('操作失败.没有查询到对应的商品	ID');
@@ -120,7 +120,7 @@ class GuanggaoController extends PublicController{
 					}
 					break;
 				case 'category':
-					$url = 'Api/Product/lists?cat_id=';
+					$url = '../listdetail/listdetail?brand_id=';
 					$isCategory = M('category')->where('id='.intval($urlId))->find();
 					if(empty($isCategory)){
 						$this->error('操作失败.没有查询到对应的分类	ID');
@@ -143,7 +143,7 @@ class GuanggaoController extends PublicController{
 
 		//保存数据
 		if (intval($_POST['adv_id'])) {
-			$this->guanggao->url = empty($url)?'':$this->domain.$url.$urlId;
+			$this->guanggao->url = empty($url)?'':$url.$urlId.'&title=水果商城';
 			$this->guanggao->url_note = empty($urlNote)?'':$urlNote;
 			$result = $this->guanggao->where('id='.intval($_POST['adv_id']))->save();
 		}else{
